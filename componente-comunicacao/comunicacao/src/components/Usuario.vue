@@ -2,11 +2,15 @@
     <div class="container">
         <h1>Componente Usuário</h1>
         <p>Esse é um componente muito legal!</p>
-        <button @click="alterarNome"></button>
+        <p>Nome é <strong>{{ nome }}</strong></p>
+        <button @click="alterarNome">Alterar Nome</button>
         <hr>
         <div class="componentes">
             <!-- vai ler o valor q está dentro de data e passar como propriedade para outro componente -->
-            <app-usuario-info :nome="nome"/>
+            <app-usuario-info 
+                :nome="nome"
+                @nomeMudou="nome = $event"
+                :reiniciarNome="reiniciarNome" />
             <app-usuario-editar />
         </div>
     </div>
@@ -17,7 +21,7 @@ import AppUsuarioInfo from './UsuarioInfo'
 import AppUsuarioEditar from './UsuarioEditar'
 
 export default {
-    components: { AppUsuarioInfo, AppUsuarioEditar },
+    components: { AppUsuarioInfo, AppUsuarioEditar},
     data() {
         return {
             nome: 'Pedro'
@@ -26,6 +30,9 @@ export default {
     methods: {
         alterarNome() {
             this.nome = 'Ana'
+        },
+        reiniciarNome() {
+            this.nome = 'Pedro'
         }
     },
 }

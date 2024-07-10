@@ -1,0 +1,37 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+</div>
+
+<script>
+    const vm = new Vue({
+        // quando um template for usado, terá apenas um unico elemento raiz (root), se não irá dar erro
+        template: `
+            <div>
+                <h1>{{ aula }}</h1>
+                <h1>{{ modulo }}</h1>
+                <button @click="alterarAula">Alterar Aula</button>
+                <button @click="alterarModulo">Alterar Módulo</button>
+            </div>
+        `,
+        data: {
+            aula: 'Aula: Montando a Instácia vue',
+            modulo: 'Módulo: Instâcia vue'
+        },
+        methods: {
+            alterarAula() {
+                this.aula += '#'
+            },
+            alterarModulo() {
+                this.modulo += '#'
+            }
+        },
+    })
+
+    // vm.$mount('#app')
+    // monta a instancia do vue, sem vincular a nenhum outro local, e esse $mount ou ($el outra alternativa do mount) precisa ou de um template ou uma função render para poder renderizar o componente
+    vm.$mount()
+    // vai pegar qualquer coisa q tem id "app", e o componente $el tem toda a estrutura html pronta para ser injetada na pagina
+    document.querySelector('#app').appendChild(vm.$el)
+</script>
