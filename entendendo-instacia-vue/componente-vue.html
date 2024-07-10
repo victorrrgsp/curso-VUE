@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <comp></comp>
+    <comp></comp>
+    <comp></comp>
+</div>
+
+<script>
+    
+    // essa é a forma de registrar um componente de forma global dentro do vue, 
+    // e para refereciar esse componente no template é colocando uma teg personalizada no proprio templante com o mesmo nome do componente
+    // a data na vue-instace é diferente da data do componente, pois a data do componente tem q ser uma function
+    Vue.component('comp', {
+        template: `
+            <div>
+                <h1>{{ aula }}</h1>
+                <h1>{{ modulo }}</h1>
+                <button @click="alterarAula">Alterar Aula</button>
+                <button @click="alterarModulo">Alterar Módulo</button>
+            </div>
+        `,
+        data: function () {
+            return {
+                aula: 'Aula: Montando a Instácia vue',
+                modulo: 'Módulo: Instâcia vue'
+            }
+        },
+        methods: {
+            alterarAula() {
+                this.aula += '#'
+            },
+            alterarModulo() {
+                this.modulo += '#'
+            }
+        },
+    })
+
+    // a instancia do vue, não pode ser repetido no template, pois não é um componente
+    const vm = new Vue({
+        el: '#app',
+
+    })
+</script>
